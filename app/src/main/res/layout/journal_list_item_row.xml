@@ -9,18 +9,13 @@
     android:layout_marginRight="@dimen/list_view_horizontal_margin"
     android:layout_marginStart="@dimen/list_view_horizontal_margin">
 
-    <View
-        android:id="@+id/vw_separator"
-        style="@style/ItemSeparatorStyle"
-        android:background="@color/colorPrimaryLight"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_journal_date"
         style="@style/ListHighlightElementStyle"
         android:text=""
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vw_separator"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="12 Dec" />
 
     <TextView
@@ -39,4 +34,9 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_journal_date"
         tools:text="Body Goes Here" />
 
+    <View
+        android:id="@+id/vw_separator"
+        style="@style/ItemSeparatorStyle"
+        android:background="@color/colorPrimaryLight"
+        app:layout_constraintTop_toBottomOf="@id/tv_journal_body" />
 </android.support.constraint.ConstraintLayout>

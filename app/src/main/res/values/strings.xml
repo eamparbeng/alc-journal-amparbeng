@@ -15,7 +15,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_new_journal_entry">NewJournalEntry</string>
+    <string name="title_activity_new_journal_entry">Post New Journal Entry</string>
     <string name="title_entry_hint">Journal Entry Title</string>
     <string name="body_entry_hint">Journal Text</string>
     <string name="new_journal_entry_save_button_text">Save Entry</string>

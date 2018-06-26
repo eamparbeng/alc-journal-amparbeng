@@ -21,12 +21,12 @@
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabNewRegistration"
+        android:id="@+id/fab_new_journal_entry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        android:src="@android:drawable/ic_menu_save"  />
+        android:src="@android:drawable/ic_input_add"  />
 
     <TextView
         android:id="@android:id/empty"

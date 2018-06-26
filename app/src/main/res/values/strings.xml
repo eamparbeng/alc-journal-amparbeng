@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">AmpJournal</string>
     <string name="title_activity_login">Login::ALC Journal (KofiAmparbeng)</string>
+    <string name="title_activity_main">ALC Journal</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -14,4 +15,11 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="title_activity_new_journal_entry">NewJournalEntry</string>
+    <string name="title_entry_hint">Journal Entry Title</string>
+    <string name="body_entry_hint">Journal Text</string>
+    <string name="new_journal_entry_save_button_text">Save Entry</string>
+    <string name="new_journal_entry_invalid_message">Invalid Journal Entry, Try again</string>
+    <string name="new_journal_entry_cancelled_message">New Journal Entry Cancelled</string>
+
 </resources>

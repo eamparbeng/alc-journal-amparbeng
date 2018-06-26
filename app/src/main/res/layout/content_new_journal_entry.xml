@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginEnd="4dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="16dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activities.NewJournalEntryActivity"
+    tools:showIn="@layout/activity_new_journal_entry">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/tv_journal_title"
+            style="@style/InputElementStyle"
+            android:hint="@string/title_entry_hint" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/input_layout_title">
+
+        <EditText
+            android:id="@+id/tv_journal_body"
+            style="@style/InputElementMultilineStyle"
+            android:hint="@string/body_entry_hint" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_new_journal_entry_save"
+        style="@style/InputElementButtonStyle"
+        android:text="@string/new_journal_entry_save_button_text"
+        app:layout_constraintTop_toBottomOf="@id/input_layout_body" />
+</android.support.constraint.ConstraintLayout>

@@ -3,38 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/tv_journal_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text=""
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_journal_body"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text=""
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_journal_title" />
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/list_view_horizontal_margin"
+    android:layout_marginLeft="@dimen/list_view_horizontal_margin"
+    android:layout_marginRight="@dimen/list_view_horizontal_margin"
+    android:layout_marginStart="@dimen/list_view_horizontal_margin">
 
     <View
         android:id="@+id/vw_separator"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorAccent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_journal_body"  />
+        style="@style/ItemSeparatorStyle"
+        android:background="@color/colorPrimaryLight"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_journal_date"
+        style="@style/ListHighlightElementStyle"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vw_separator"
+        tools:text="12 Dec" />
+
+    <TextView
+        android:id="@+id/tv_journal_title"
+        style="@style/ListTitleElementStyle"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/tv_journal_body"
+        app:layout_constraintStart_toEndOf="@+id/tv_journal_date"
+        tools:text="Here is a Journal Entry" />
+
+    <TextView
+        android:id="@+id/tv_journal_body"
+        style="@style/ListNormaltElementStyle"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_journal_date"
+        tools:text="Body Goes Here" />
+
 </android.support.constraint.ConstraintLayout>

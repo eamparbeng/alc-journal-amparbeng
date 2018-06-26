@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="list_view_horizontal_margin">16dp</dimen>
+    <dimen name="button_top_margin">16dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="list_element_vertical_margin">4dp</dimen>
+    <dimen name="list_element_horizonal_margin">4dp</dimen>
+    <dimen name="list_highlight_element_width">140dp</dimen>
+    <dimen name="list_highlight_element_text_size">32sp</dimen>
+    <dimen name="list_title_element_text_size">24sp</dimen>
+    <dimen name="list_normal_element_text_size">14sp</dimen>
+</resources>

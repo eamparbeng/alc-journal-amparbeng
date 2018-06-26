@@ -42,6 +42,6 @@
     <Button
         android:id="@+id/btn_new_journal_entry_save"
         style="@style/InputElementButtonStyle"
-        android:text="@string/new_journal_entry_save_button_text"
+        android:text="@string/new_journal_entry_insert_button_text"
         app:layout_constraintTop_toBottomOf="@id/input_layout_body" />
 </android.support.constraint.ConstraintLayout>

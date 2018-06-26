@@ -23,10 +23,20 @@ public class JournalRepository {
     LiveData<List<JournalEntry>> getAllEntries() {
         return mAllEntries;
     }
+    LiveData<JournalEntry> getJournalEntryById(int id) {
+        return mJournalDao.getJournalEntryById(id);
+    }
 
+    JournalEntry getJournalEntryByIdNoWatch(int id) {
+        return mJournalDao.getJournalEntryByIdNoWatch(id);
+    }
 
-    public void insert (JournalEntry word) {
+    public void insert(JournalEntry word) {
         new insertAsyncTask(mJournalDao).execute(word);
+    }
+
+    public void update(JournalEntry word) {
+        new updateAsyncTask(mJournalDao).execute(word);
     }
 
     private static class insertAsyncTask extends AsyncTask<JournalEntry, Void, Void> {
@@ -40,6 +50,21 @@ public class JournalRepository {
         @Override
         protected Void doInBackground(final JournalEntry... params) {
             mAsyncTaskDao.insert(params[0]);
+            return null;
+        }
+    }
+
+    private static class updateAsyncTask extends AsyncTask<JournalEntry, Void, Void> {
+
+        private JournalDao mAsyncTaskDao;
+
+        updateAsyncTask(JournalDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final JournalEntry... params) {
+            mAsyncTaskDao.update(params[0]);
             return null;
         }
     }

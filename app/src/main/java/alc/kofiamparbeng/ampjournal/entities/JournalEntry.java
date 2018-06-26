@@ -21,7 +21,10 @@ public class JournalEntry {
     private String mBody;
     @NonNull
     @ColumnInfo(name = "entryDate")
-    private Date mDate;
+    private Date mEntryDate;
+
+    @ColumnInfo(name = "updatedDate")
+    private Date mUpdatedDate;
 
     public void setTitle(@NonNull String title) {
         this.mTitle = title;
@@ -39,12 +42,12 @@ public class JournalEntry {
         return mBody;
     }
 
-    public void setDate(@NonNull Date date) {
-        this.mDate = date;
+    public void setEntryDate(@NonNull Date date) {
+        this.mEntryDate = date;
     }
 
-    public Date getDate() {
-        return mDate;
+    public Date getEntryDate() {
+        return mEntryDate;
     }
 
 
@@ -56,4 +59,11 @@ public class JournalEntry {
         this.id = newId;
     }
 
+    public void setUpdatedDate(@NonNull Date date) {
+        this.mUpdatedDate = date;
+    }
+
+    public Date getUpdatedDate() {
+        return mUpdatedDate;
+    }
 }

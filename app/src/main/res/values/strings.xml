@@ -18,8 +18,11 @@
     <string name="title_activity_new_journal_entry">Post New Journal Entry</string>
     <string name="title_entry_hint">Journal Entry Title</string>
     <string name="body_entry_hint">Journal Text</string>
-    <string name="new_journal_entry_save_button_text">Save Entry</string>
+    <string name="new_journal_entry_insert_button_text">Add Journal Entry</string>
+    <string name="new_journal_entry_update_button_text">Update Journal Entry</string>
     <string name="new_journal_entry_invalid_message">Invalid Journal Entry, Try again</string>
     <string name="new_journal_entry_cancelled_message">New Journal Entry Cancelled</string>
+    <string name="new_journal_entry_inserted_message">New Journal Added</string>
+    <string name="new_journal_entry_updated_message">New Journal Entry Updated</string>
 
 </resources>

@@ -21,8 +21,17 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
     private LayoutInflater mInfater;
     private List<JournalEntry> mEntries;
 
+    private static final SimpleDateFormat simpleDateFormatDayName = new SimpleDateFormat("EEE");
+    private static final SimpleDateFormat simpleDateFormatShortDate = new SimpleDateFormat("dd MMM");
+
+    private JournalEntryClickListener mEntryClickListener;
+
     public JournalAdapter(Context context) {
         mInfater = LayoutInflater.from(context);
+    }
+
+    public void setJournalEntryClickListener(JournalEntryClickListener newListener) {
+        mEntryClickListener = newListener;
     }
 
     @NonNull
@@ -53,7 +62,7 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView mJournalSubjectTextView;
         private final TextView mJournalBodyTextView;
         private final TextView mJournalDateTextView;
@@ -65,13 +74,14 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
             mJournalSubjectTextView = itemView.findViewById(R.id.tv_journal_title);
             mJournalDateTextView = itemView.findViewById(R.id.tv_journal_date);
 
+            itemView.setOnClickListener(this);
         }
 
         public void doViewBindings(int posittion, JournalEntry dataItem) {
             mJournalSubjectTextView.setText(dataItem.getTitle());
             mJournalBodyTextView.setText(dataItem.getBody());
 
-            mJournalDateTextView.setText(formatJournalEntryDate(dataItem.getDate()));
+            mJournalDateTextView.setText(formatJournalEntryDate(dataItem.getEntryDate()));
         }
 
         private String formatJournalEntryDate(Date entryDate) {
@@ -80,20 +90,29 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
             Calendar entryCalendar = Calendar.getInstance();
             Calendar todayCalendar = Calendar.getInstance();
             todayCalendar.setTime(now);
-            todayCalendar.set(todayCalendar.get(Calendar.YEAR), todayCalendar.get(Calendar.MONTH), todayCalendar.get(Calendar.DATE),0,0,0);
+            todayCalendar.set(todayCalendar.get(Calendar.YEAR), todayCalendar.get(Calendar.MONTH), todayCalendar.get(Calendar.DATE), 0, 0, 0);
             entryCalendar.setTime(entryDate);
             weekAgoCalendar.setTime(now);
             weekAgoCalendar.add(Calendar.DATE, -7);
-            if (todayCalendar.compareTo( entryCalendar)<=0){
+            if (todayCalendar.compareTo(entryCalendar) <= 0) {
                 return "Today";
-            }else if (weekAgoCalendar.compareTo( entryCalendar)<=0) {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE");
-                return simpleDateFormat.format(entryDate);
-            }
-            else {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM");
-                return simpleDateFormat.format(entryDate);
+            } else if (weekAgoCalendar.compareTo(entryCalendar) <= 0) {
+                return simpleDateFormatDayName.format(entryDate);
+            } else {
+                return simpleDateFormatShortDate.format(entryDate);
             }
         }
+
+        @Override
+        public void onClick(View view) {
+            if (mEntryClickListener != null) {
+                JournalEntry currentEntry = mEntries.get(getAdapterPosition());
+                mEntryClickListener.onJournalEntryClicked(currentEntry.getId());
+            }
+        }
+    }
+
+    public interface JournalEntryClickListener {
+        void onJournalEntryClicked(int journalEntryId);
     }
 }

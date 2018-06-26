@@ -17,4 +17,48 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="InputElementStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="InputElementMultilineStyle" parent="InputElementStyle">
+        <item name="android:layout_gravity">start</item>
+        <item name="android:gravity">start</item>
+        <item name=" android:lines">5</item>
+    </style>
+
+    <style name="InputElementButtonStyle" parent="InputElementStyle">
+        <item name="android:layout_marginTop">@dimen/button_top_margin</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="ListElementStyle">
+        <item name="android:layout_marginTop">@dimen/list_element_vertical_margin</item>
+        <item name="android:layout_marginEnd">@dimen/list_element_horizonal_margin</item>
+        <item name="android:layout_marginLeft">@dimen/list_element_horizonal_margin</item>
+        <item name="android:layout_marginRight">@dimen/list_element_horizonal_margin</item>
+        <item name="android:layout_marginStart">@dimen/list_element_horizonal_margin</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ListHighlightElementStyle" parent="ListElementStyle">
+        <item name="android:layout_width">@dimen/list_highlight_element_width</item>
+        <item name="android:textSize">@dimen/list_highlight_element_text_size</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+    <style name="ListTitleElementStyle" parent="ListElementStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/list_title_element_text_size</item>
+    </style>
+    <style name="ListNormaltElementStyle" parent="ListElementStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/list_normal_element_text_size</item>
+    </style>
+    <style name="ItemSeparatorStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/colorPrimaryLight</item>
+    </style>
 </resources>

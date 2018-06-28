@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">AmpJournal</string>
+    <string name="app_name">AlcJournal</string>
     <string name="title_activity_login">Login::ALC Journal (KofiAmparbeng)</string>
     <string name="title_activity_main">ALC Journal</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
+    <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
@@ -15,6 +15,13 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="error_signing_in">Could not sign In</string>
+    <string name="emoty_email_prompt">Email Must be Entered</string>
+    <string name="emoty_password_prompt">Password Must be Entered</string>
+    <string name="password_complexity_check_failure_prompt">Password must be at least 6 characters</string>
+    <string name="prompt_full_name">Name</string>
+    <string name="action_sign_up">Register</string>
+    <string name="action_new_sign_up">No Account, Sign Up</string>
     <string name="title_activity_new_journal_entry">Post New Journal Entry</string>
     <string name="title_entry_hint">Journal Entry Title</string>
     <string name="body_entry_hint">Journal Text</string>
@@ -24,5 +31,10 @@
     <string name="new_journal_entry_cancelled_message">New Journal Entry Cancelled</string>
     <string name="new_journal_entry_inserted_message">New Journal Added</string>
     <string name="new_journal_entry_updated_message">New Journal Entry Updated</string>
+    <string name="title_activity_register">Sign in</string>
 
+    <string name="main_app_title">AmpJournal</string>
+    <string name="sub_app_title">Entry into Google Africa Challenge</string>
+
+    <string name="AMPJOURNAL_SIGNIN_TOKEN_ID" translatable="false">897264641516-a49hcv9ohs7f6thnvt5d45a623ed8bte.apps.googleusercontent.com</string>
 </resources>

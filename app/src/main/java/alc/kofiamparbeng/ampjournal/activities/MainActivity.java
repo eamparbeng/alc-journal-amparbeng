@@ -13,8 +13,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Date;
 import java.util.List;
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.Jo
 
     public static final int NEW_JOURNAL_ENTRY_ACTIVITY_REQUEST_CODE = 712;
 
+    private FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.Jo
         prepareViewModel();
 
         preparePullToRefresh();
+
+        //Get Firebase auth instance
+        auth = FirebaseAuth.getInstance();
     }
 
     private void preparePullToRefresh() {
@@ -153,10 +161,25 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.Jo
         }
     }
 
+    private void logOutCurrentUser() {
+        auth.signOut();
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        finish();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_log_out_current_user) {
+            logOutCurrentUser();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

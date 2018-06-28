@@ -6,4 +6,9 @@
         android:icon="@android:drawable/ic_menu_search"
         android:title=""
         app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_log_out_current_user"
+        android:icon="@android:drawable/ic_partial_secure"
+        android:title=""
+        app:showAsAction="always" />
 </menu>

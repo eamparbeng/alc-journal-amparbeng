@@ -48,17 +48,16 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_email"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_sub_app_title">
+        app:layout_constraintTop_toBottomOf="@+id/vertical_guideline">
 
         <AutoCompleteTextView
             android:id="@+id/tv_email"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_email"
             android:inputType="textEmailAddress"
@@ -69,17 +68,15 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/til_password"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_email">
 
         <EditText
             android:id="@+id/tv_password"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_password"
             android:imeActionId="6"
@@ -94,28 +91,27 @@
     <Button
         android:id="@+id/email_sign_in_button"
         style="?android:textAppearanceSmall"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/sign_in_button_horizontal_margin"
         android:layout_marginRight="@dimen/sign_in_button_horizontal_margin"
         android:layout_marginTop="16dp"
-        android:text="@string/action_sign_in_short"
+        android:text="@string/action_sign_in"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_password" />
+        app:layout_constraintStart_toEndOf="@id/horizontal_guideline"
+        app:layout_constraintTop_toBottomOf="@id/tv_sub_app_title" />
 
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/google_sign_in_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:foregroundGravity="center"
         android:layout_marginLeft="@dimen/sign_in_button_horizontal_margin"
         android:layout_marginRight="@dimen/sign_in_button_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
         android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@id/horizontal_guideline"
         app:layout_constraintTop_toBottomOf="@+id/email_sign_in_button" />
 
     <TextView
@@ -132,6 +128,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/horizontal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".65" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".35" />
 
     <ProgressBar
         android:id="@+id/progressBar"

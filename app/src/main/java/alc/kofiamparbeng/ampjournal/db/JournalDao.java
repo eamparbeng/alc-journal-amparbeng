@@ -32,4 +32,7 @@ public interface JournalDao {
 
     @Query("SELECT * from journal_tbl WHERE id = :id")
     JournalEntry getJournalEntryByIdNoWatch(int id);
+
+    @Query("SELECT * from journal_tbl ORDER BY entryDate DESC")
+    List<JournalEntry> getAllEntriesList();
 }

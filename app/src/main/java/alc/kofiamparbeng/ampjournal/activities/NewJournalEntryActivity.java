@@ -55,6 +55,7 @@ public class NewJournalEntryActivity extends AppCompatActivity {
         });
 
         mJournalDatabase = JournalDatabase.getDatabase(getApplicationContext());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent callingIntent = getIntent();
         if (callingIntent.hasExtra(EXTRA_JOURNAL_ENTRY_ID)) {

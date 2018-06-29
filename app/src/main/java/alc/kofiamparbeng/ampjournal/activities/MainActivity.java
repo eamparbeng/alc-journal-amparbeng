@@ -27,6 +27,8 @@ import alc.kofiamparbeng.ampjournal.data.JournalAdapter;
 import alc.kofiamparbeng.ampjournal.data.JournalEntryViewModel;
 import alc.kofiamparbeng.ampjournal.data.JournalListViewModel;
 import alc.kofiamparbeng.ampjournal.entities.JournalEntry;
+import alc.kofiamparbeng.ampjournal.fragments.SettingsFragment;
+import alc.kofiamparbeng.ampjournal.sync.JournalSyncUtils;
 
 public class MainActivity extends AppCompatActivity implements JournalAdapter.JournalEntryClickListener {
     private JournalAdapter mJournalAdapter;
@@ -50,8 +52,15 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.Jo
 
         preparePullToRefresh();
 
+        prepareSync();
+
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
+
+    }
+
+    private void prepareSync() {
+        JournalSyncUtils.initialize(this);
     }
 
     private void preparePullToRefresh() {
@@ -175,9 +184,14 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.Jo
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_log_out_current_user) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_log_out_current_user) {
             logOutCurrentUser();
             return true;
+        }
+        if (itemId == R.id.menu_settings) {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -10,4 +10,6 @@
     <dimen name="list_highlight_element_text_size">32sp</dimen>
     <dimen name="list_title_element_text_size">24sp</dimen>
     <dimen name="list_normal_element_text_size">14sp</dimen>
+    <dimen name="sign_in_button_horizontal_margin">2dp</dimen>
+    <dimen name="sign_in_button_vertical_margin">2dp</dimen>
 </resources>

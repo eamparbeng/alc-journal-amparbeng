@@ -40,7 +40,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/sub_app_title"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="10sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_main_app_title" />
@@ -68,7 +68,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_password"
+        android:id="@+id/til_full_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
@@ -76,6 +76,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/til_email">
+
+        <AutoCompleteTextView
+            android:id="@+id/tv_full_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/prompt_full_name"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_full_name">
 
         <EditText
             android:id="@+id/tv_password"
@@ -92,14 +113,14 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/email_sign_in_button"
+        android:id="@+id/email_sign_up_button"
         style="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/sign_in_button_horizontal_margin"
-        android:layout_marginRight="@dimen/sign_in_button_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="16dp"
-        android:text="@string/action_sign_in_short"
+        android:text="@string/action_sign_up"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,26 +133,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:foregroundGravity="center"
-        android:layout_marginLeft="@dimen/sign_in_button_horizontal_margin"
-        android:layout_marginRight="@dimen/sign_in_button_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/email_sign_in_button" />
-
-    <TextView
-        android:id="@+id/tv_new_sign_up_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/action_new_sign_up"
-        android:textColor="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/email_sign_up_button" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -143,5 +148,4 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 </android.support.constraint.ConstraintLayout>

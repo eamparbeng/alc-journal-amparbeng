@@ -26,6 +26,9 @@ public class JournalEntry {
     @ColumnInfo(name = "updatedDate")
     private Date mUpdatedDate;
 
+    @ColumnInfo(name = "folder_name")
+    private String mFolderName;
+
     public void setTitle(@NonNull String title) {
         this.mTitle = title;
     }
@@ -65,5 +68,13 @@ public class JournalEntry {
 
     public Date getUpdatedDate() {
         return mUpdatedDate;
+    }
+
+    public void setFolderName(@NonNull String folderName) {
+        this.mFolderName = folderName;
+    }
+
+    public String getFolderName() {
+        return mFolderName;
     }
 }

@@ -21,8 +21,9 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
     private LayoutInflater mInfater;
     private List<JournalEntry> mEntries;
 
-    private static final SimpleDateFormat simpleDateFormatDayName = new SimpleDateFormat("EEE");
+    private static final SimpleDateFormat simpleDateFormatDayName = new SimpleDateFormat("EEEE");
     private static final SimpleDateFormat simpleDateFormatShortDate = new SimpleDateFormat("dd MMM");
+    private static final SimpleDateFormat simpleDateFormatFullDate = new SimpleDateFormat("dd MMM yy");
 
     private JournalEntryClickListener mEntryClickListener;
 
@@ -64,24 +65,27 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView mJournalSubjectTextView;
-        private final TextView mJournalBodyTextView;
+        private final TextView mFolderNameTextView;
         private final TextView mJournalDateTextView;
+        private final TextView mFullJournalDateTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            mJournalBodyTextView = itemView.findViewById(R.id.tv_journal_body);
+            mFolderNameTextView = itemView.findViewById(R.id.tv_journal_folder);
             mJournalSubjectTextView = itemView.findViewById(R.id.tv_journal_title);
             mJournalDateTextView = itemView.findViewById(R.id.tv_journal_date);
+            mFullJournalDateTextView = itemView.findViewById(R.id.tv_date_full);
 
             itemView.setOnClickListener(this);
         }
 
         public void doViewBindings(int posittion, JournalEntry dataItem) {
             mJournalSubjectTextView.setText(dataItem.getTitle());
-            mJournalBodyTextView.setText(dataItem.getBody());
+            mFolderNameTextView.setText(dataItem.getFolderName());
 
             mJournalDateTextView.setText(formatJournalEntryDate(dataItem.getEntryDate()));
+            mFullJournalDateTextView.setText(simpleDateFormatFullDate.format(dataItem.getEntryDate()));
         }
 
         private String formatJournalEntryDate(Date entryDate) {
@@ -96,10 +100,8 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
             weekAgoCalendar.add(Calendar.DATE, -7);
             if (todayCalendar.compareTo(entryCalendar) <= 0) {
                 return "Today";
-            } else if (weekAgoCalendar.compareTo(entryCalendar) <= 0) {
-                return simpleDateFormatDayName.format(entryDate);
             } else {
-                return simpleDateFormatShortDate.format(entryDate);
+                return simpleDateFormatDayName.format(entryDate);
             }
         }
 

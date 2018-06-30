@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.Jo
         if (requestCode == NEW_JOURNAL_ENTRY_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             final String title = data.getStringExtra(NewJournalEntryActivity.EXTRA_NEW_ENTRY_TITLE);
             final String body = data.getStringExtra(NewJournalEntryActivity.EXTRA_NEW_ENTRY_BODY);
+            final String folderName = data.getStringExtra(NewJournalEntryActivity.EXTRA_NEW_ENTRY_FOLDER_NAME);
 
 
             if (data.hasExtra(NewJournalEntryActivity.EXTRA_JOURNAL_ENTRY_ID)) {
@@ -140,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.Jo
                         entryLiveData.removeObserver(this);
                         entry.setBody(body);
                         entry.setTitle(title);
+                        entry.setFolderName(folderName);
                         entry.setUpdatedDate(new Date());
                         entry.setId(id);
                         mJournalEntryViewModel.update(entry);
@@ -154,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.Jo
                 JournalEntry entry = new JournalEntry();
                 entry.setBody(body);
                 entry.setTitle(title);
+                entry.setFolderName(folderName);
                 entry.setUpdatedDate(new Date());
                 entry.setEntryDate(new Date());
                 mJournalEntryViewModel.insert(entry);
@@ -191,6 +194,10 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.Jo
         }
         if (itemId == R.id.menu_settings) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        }
+        if (itemId == R.id.menu_manage_journal_folders) {
+            Intent intent = new Intent(MainActivity.this, FolderManagementActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

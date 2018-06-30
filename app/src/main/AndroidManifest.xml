@@ -43,6 +43,9 @@
         <service android:name=".sync.JournalSyncIntentService" android:exported="false"/>
 
         <activity android:name=".activities.SettingsActivity" android:label="@string/title_activity_settings" android:parentActivityName=".activities.MainActivity"></activity>
+        <activity android:name=".activities.FolderSelecterActivity" android:label="@string/title_activity_select_folder" android:parentActivityName=".activities.NewJournalEntryActivity" />
+        <activity android:name=".activities.FolderManagementActivity" android:label="@string/title_activity_manage_folder" android:parentActivityName=".activities.NewJournalEntryActivity" />
+        <activity android:name=".activities.EditFolderActivity" android:label="@string/title_activity_edit_folder" android:parentActivityName=".activities.FolderManagementActivity" />
     </application>
 
 </manifest>

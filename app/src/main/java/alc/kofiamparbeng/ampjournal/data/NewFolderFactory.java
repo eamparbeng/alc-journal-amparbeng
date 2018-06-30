@@ -5,19 +5,19 @@ import android.arch.lifecycle.ViewModelProvider;
 
 import alc.kofiamparbeng.ampjournal.db.JournalDatabase;
 
-public class NewJournalEntryFactory  extends ViewModelProvider.NewInstanceFactory {
+public class NewFolderFactory extends ViewModelProvider.NewInstanceFactory {
 
         private final JournalDatabase mDb;
-        private final int mJournalEntryId;
+        private final int mFolderId;
 
-        public NewJournalEntryFactory(JournalDatabase database, int journalEntryId) {
+        public NewFolderFactory(JournalDatabase database, int folderId) {
             mDb = database;
-            mJournalEntryId = journalEntryId;
+            mFolderId = folderId;
         }
 
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
             //noinspection unchecked
-            return (T) new JournalEntryViewModel(mDb, mJournalEntryId);
+            return (T) new FolderItemViewModel(mDb, mFolderId);
         }
     }

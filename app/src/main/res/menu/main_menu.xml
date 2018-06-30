@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/menu_search_journal_entries"
-        android:icon="@android:drawable/ic_menu_search"
-        android:title=""
-        app:showAsAction="always" />
+
     <item
         android:id="@+id/menu_settings"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="Settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_manage_journal_folders"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="Manage Folders"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_log_out_current_user"

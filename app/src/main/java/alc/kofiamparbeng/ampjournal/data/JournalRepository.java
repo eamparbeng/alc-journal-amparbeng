@@ -6,18 +6,24 @@ import android.os.AsyncTask;
 
 import java.util.List;
 
+import alc.kofiamparbeng.ampjournal.db.FolderDao;
 import alc.kofiamparbeng.ampjournal.db.JournalDao;
 import alc.kofiamparbeng.ampjournal.db.JournalDatabase;
 import alc.kofiamparbeng.ampjournal.entities.JournalEntry;
+import alc.kofiamparbeng.ampjournal.entities.JournalFolder;
 
 public class JournalRepository {
     private JournalDao mJournalDao;
+    private FolderDao mFolderDao;
     private LiveData<List<JournalEntry>> mAllEntries;
+    private LiveData<List<JournalFolder>> mAllFolders;
 
     JournalRepository(Application application) {
         JournalDatabase db = JournalDatabase.getDatabase(application);
         mJournalDao = db.journalDao();
+        mFolderDao =db.folderDao();
         mAllEntries = mJournalDao.getAllEntries();
+        mAllFolders = mFolderDao.getAllFolders();
     }
 
     LiveData<List<JournalEntry>> getAllEntries() {
@@ -64,6 +70,55 @@ public class JournalRepository {
 
         @Override
         protected Void doInBackground(final JournalEntry... params) {
+            mAsyncTaskDao.update(params[0]);
+            return null;
+        }
+    }
+
+    LiveData<List<JournalFolder>> getAllFolders() {
+        return mAllFolders;
+    }
+    LiveData<JournalFolder> getFolderById(int id) {
+        return mFolderDao.getFolderById(id);
+    }
+
+    JournalFolder getFolderByIdNoWatch(int id) {
+        return mFolderDao.getFolderyByIdNoWatch(id);
+    }
+
+    public void insert(JournalFolder word) {
+        new insertFolderAsyncTask(mFolderDao).execute(word);
+    }
+
+    public void update(JournalFolder word) {
+        new updateFolderAsyncTask(mFolderDao).execute(word);
+    }
+
+    private static class insertFolderAsyncTask extends AsyncTask<JournalFolder, Void, Void> {
+
+        private FolderDao mAsyncTaskDao;
+
+        insertFolderAsyncTask(FolderDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final JournalFolder... params) {
+            mAsyncTaskDao.insert(params[0]);
+            return null;
+        }
+    }
+
+    private static class updateFolderAsyncTask extends AsyncTask<JournalFolder, Void, Void> {
+
+        private FolderDao mAsyncTaskDao;
+
+        updateFolderAsyncTask(FolderDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final JournalFolder... params) {
             mAsyncTaskDao.update(params[0]);
             return null;
         }

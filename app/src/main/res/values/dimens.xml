@@ -9,7 +9,7 @@
     <dimen name="list_element_vertical_margin">2dp</dimen>
     <dimen name="list_element_horizonal_margin">2dp</dimen>
     <dimen name="list_highlight_element_width">100dp</dimen>
-    <dimen name="list_highlight_element_text_size">28sp</dimen>
+    <dimen name="list_highlight_element_text_size">22sp</dimen>
     <dimen name="list_title_element_text_size">18sp</dimen>
     <dimen name="list_normal_element_text_size">12sp</dimen>
     <dimen name="sign_in_button_horizontal_margin">8dp</dimen>

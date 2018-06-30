@@ -3,6 +3,9 @@
     <string name="title_activity_login">Login::ALC Journal (KofiAmparbeng)</string>
     <string name="title_activity_main">ALC Journal</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_select_folder">Select Journal Folder</string>
+    <string name="title_activity_manage_folder">Journal Folders</string>
+    <string name="title_activity_edit_folder">Add/Edit Journal Folders</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -25,14 +28,21 @@
     <string name="action_new_sign_up">No Account, Sign Up</string>
     <string name="title_activity_new_journal_entry">Post New Journal Entry</string>
     <string name="title_entry_hint">Journal Entry Title</string>
+    <string name="folder_entry_hint">Folder</string>
     <string name="body_entry_hint">Journal Text</string>
     <string name="new_journal_entry_insert_button_text">Add Journal Entry</string>
     <string name="new_journal_entry_update_button_text">Update Journal Entry</string>
     <string name="new_journal_entry_invalid_message">Invalid Journal Entry, Try again</string>
     <string name="new_journal_entry_cancelled_message">New Journal Entry Cancelled</string>
-    <string name="new_journal_entry_inserted_message">New Journal Added</string>
+    <string name="new_journal_entry_inserted_message">New Journal Entry Added</string>
     <string name="new_journal_entry_updated_message">New Journal Entry Updated</string>
     <string name="title_activity_register">Sign in</string>
+    <string name="title_activity_new_folder">Add New Folder</string>
+    <string name="title_activity_update_folder">Update Folder</string>
+    <string name="new_folder_invalid_message">Invalid Folder Name, Try again</string>
+    <string name="new_folder_cancelled_message">New Folder Entry Cancelled</string>
+    <string name="new_folder_inserted_message">New Folder Added</string>
+    <string name="new_folder_updated_message">Journal Folder Updated</string>
 
     <string name="main_app_title">AmpJournal</string>
     <string name="sub_app_title">Entry into Google Africa Challenge</string>

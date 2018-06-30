@@ -30,6 +30,12 @@
         <item name=" android:lines">5</item>
     </style>
 
+    <style name="InputElementLargeTextStyle" parent="InputElementStyle">
+        <item name="android:textSize">@dimen/list_title_element_text_size</item>
+        <item name="android:layout_marginTop">@dimen/list_element_vertical_margin</item>
+        <item name="android:layout_marginBottom">@dimen/list_element_vertical_margin</item>
+    </style>
+
     <style name="InputElementButtonStyle" parent="InputElementStyle">
         <item name="android:layout_marginTop">@dimen/button_top_margin</item>
         <item name="android:background">@color/colorPrimary</item>
@@ -46,9 +52,11 @@
     </style>
 
     <style name="ListHighlightElementStyle" parent="ListElementStyle">
-        <item name="android:layout_width">@dimen/list_highlight_element_width</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:textSize">@dimen/list_highlight_element_text_size</item>
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
     </style>
     <style name="ListTitleElementStyle" parent="ListElementStyle">
         <item name="android:layout_width">wrap_content</item>
@@ -57,6 +65,14 @@
     <style name="ListNormaltElementStyle" parent="ListElementStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:textSize">@dimen/list_normal_element_text_size</item>
+        <item name="android:singleLine">false</item>
+    </style>
+    <style name="ListDateElementStyle" parent="ListElementStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/list_normal_element_text_size</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
     <style name="ItemSeparatorStyle">
         <item name="android:layout_width">match_parent</item>

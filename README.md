@@ -1,71 +1,28 @@
 # ALC AmpJournal
 
-Entry into the Africa Learning Challenge by Andela, Google and Udacity
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+Entry into the Africa Learning Challenge by Andela, Google and Udacity.
+This is a journal application for managing short notes, diaries or quick information for access.
+The journal is grouped into customizable folders which are seamlessly backed up 
+into firebase database and restored when signed in on a different installation.
+Storage and presentation on the device is managed using Android architecture components
+with units tests built wit Junit, Mockito and Android Architecture Unit Tests
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+To install the application, download the APK from the link below
 
-Say what the step will be
+[Signed APK](https://acsint.io/)
 
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## ALC AmpJournal
-
-Entry into the Andela, Google and Udacity Africa Challenge by @KofiAmparbeng
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+Regsiter with Email Address and Password or Google Account
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Firebanse Authentication and Database](https://firebase.google.com/) - Authentication and Storage
+* [Android Studio](https://developer.android.com/studio/) - IDE
+* [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/) - ORM, LiveData, ViewModel
+* [Github](https://github.com/eamparbeng/alc-journal-amparbeng) - Source code repository
+* [Mockito](http://site.mockito.org/) - Unit Tests
 
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
 ## Authors
 

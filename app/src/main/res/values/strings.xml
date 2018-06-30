@@ -1,12 +1,16 @@
 <resources>
-    <string name="app_name">AmpJournal</string>
+    <string name="app_name">AlcJournal</string>
     <string name="title_activity_login">Login::ALC Journal (KofiAmparbeng)</string>
     <string name="title_activity_main">ALC Journal</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_select_folder">Select Journal Folder</string>
+    <string name="title_activity_manage_folder">Journal Folders</string>
+    <string name="title_activity_edit_folder">Journal Folders</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in with email</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -15,11 +19,115 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_new_journal_entry">NewJournalEntry</string>
+    <string name="error_signing_in">Could not sign In</string>
+    <string name="emoty_email_prompt">Email Must be Entered</string>
+    <string name="emoty_password_prompt">Password Must be Entered</string>
+    <string name="password_complexity_check_failure_prompt">Password must be at least 6 characters</string>
+    <string name="prompt_full_name">Name</string>
+    <string name="action_sign_up">Register</string>
+    <string name="action_new_sign_up">No Account, Sign Up</string>
+    <string name="title_activity_new_journal_entry">Post New Journal Entry</string>
     <string name="title_entry_hint">Journal Entry Title</string>
+    <string name="folder_entry_hint">Folder</string>
     <string name="body_entry_hint">Journal Text</string>
-    <string name="new_journal_entry_save_button_text">Save Entry</string>
+    <string name="new_journal_entry_insert_button_text">Add Journal Entry</string>
+    <string name="new_journal_entry_update_button_text">Update Journal Entry</string>
     <string name="new_journal_entry_invalid_message">Invalid Journal Entry, Try again</string>
     <string name="new_journal_entry_cancelled_message">New Journal Entry Cancelled</string>
+    <string name="new_journal_entry_inserted_message">New Journal Entry Added</string>
+    <string name="new_journal_entry_updated_message">New Journal Entry Updated</string>
+    <string name="title_activity_register">Sign in</string>
+    <string name="title_activity_new_folder">Add New Folder</string>
+    <string name="title_activity_update_folder">Update Folder</string>
+    <string name="new_folder_invalid_message">Invalid Folder Name, Try again</string>
+    <string name="new_folder_cancelled_message">New Folder Entry Cancelled</string>
+    <string name="new_folder_inserted_message">New Folder Added</string>
+    <string name="new_folder_updated_message">Journal Folder Updated</string>
+    <string name="immediate_sync_started_message">Journal Entries and folders are being synced to cloud now</string>
 
+    <string name="menu_immediate_sync_title">Sync Immediately</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_manage_folders">Manage Folders</string>
+    <string name="menu_log_out">Log Out</string>
+
+    <string name="main_app_title">AmpJournal</string>
+    <string name="sub_app_title">Entry into Google Africa Challenge</string>
+
+    <string name="pref_sync_data_key" translatable="false">sync_data_key</string>
+    <string name="pref_sync_data_title">Should Journal be Synced to Cloud?</string>
+
+    <string name="AMPJOURNAL_SIGNIN_TOKEN_ID" translatable="false">897264641516-a49hcv9ohs7f6thnvt5d45a623ed8bte.apps.googleusercontent.com</string>
+
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
 </resources>

@@ -9,34 +9,46 @@
     android:layout_marginRight="@dimen/list_view_horizontal_margin"
     android:layout_marginStart="@dimen/list_view_horizontal_margin">
 
+    <TextView
+        android:id="@+id/tv_journal_folder"
+        style="@style/ListHighlightElementStyle"
+        app:layout_constraintRight_toLeftOf="@id/folder_guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Diary" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/folder_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".4" />
+
+    <TextView
+        android:id="@+id/tv_journal_date"
+        style="@style/ListTitleElementStyle"
+        app:layout_constraintStart_toEndOf="@id/folder_guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="12 Dec" />
+
+    <TextView
+        android:id="@+id/tv_date_full"
+        style="@style/ListDateElementStyle"
+        app:layout_constraintBottom_toTopOf="@id/tv_journal_title"
+        app:layout_constraintStart_toEndOf="@id/tv_journal_date"
+        tools:text="x/y/zz" />
+
+    <TextView
+        android:id="@+id/tv_journal_title"
+        style="@style/ListNormaltElementStyle"
+        app:layout_constraintStart_toEndOf="@id/folder_guideline"
+        app:layout_constraintTop_toBottomOf="@id/tv_journal_date"
+        tools:text="Here is a Journal Entry" />
+
+
     <View
         android:id="@+id/vw_separator"
         style="@style/ItemSeparatorStyle"
         android:background="@color/colorPrimaryLight"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_journal_date"
-        style="@style/ListHighlightElementStyle"
-        android:text=""
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vw_separator"
-        tools:text="12 Dec" />
-
-    <TextView
-        android:id="@+id/tv_journal_title"
-        style="@style/ListTitleElementStyle"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/tv_journal_body"
-        app:layout_constraintStart_toEndOf="@+id/tv_journal_date"
-        tools:text="Here is a Journal Entry" />
-
-    <TextView
-        android:id="@+id/tv_journal_body"
-        style="@style/ListNormaltElementStyle"
-        android:text=""
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_journal_date"
-        tools:text="Body Goes Here" />
-
+        app:layout_constraintTop_toBottomOf="@id/tv_journal_title" />
 </android.support.constraint.ConstraintLayout>

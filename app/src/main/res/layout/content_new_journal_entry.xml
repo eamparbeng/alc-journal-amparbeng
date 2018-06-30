@@ -27,10 +27,30 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_folder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/tv_journal_folder"
+        app:layout_constraintTop_toBottomOf="@id/input_layout_title">
+
+        <TextView
+            android:id="@+id/tv_journal_folder"
+            style="@style/InputElementLargeTextStyle"
+            android:hint="@string/folder_entry_hint" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <View
+        android:id="@+id/vw_folder_separator"
+        style="@style/ItemSeparatorStyle"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/input_layout_folder" />
+
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/input_layout_title">
+        app:layout_constraintTop_toBottomOf="@id/vw_folder_separator">
 
         <EditText
             android:id="@+id/tv_journal_body"
@@ -42,6 +62,6 @@
     <Button
         android:id="@+id/btn_new_journal_entry_save"
         style="@style/InputElementButtonStyle"
-        android:text="@string/new_journal_entry_save_button_text"
+        android:text="@string/new_journal_entry_insert_button_text"
         app:layout_constraintTop_toBottomOf="@id/input_layout_body" />
 </android.support.constraint.ConstraintLayout>

@@ -2,8 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_search_journal_entries"
-        android:icon="@android:drawable/ic_menu_search"
-        android:title=""
-        app:showAsAction="always" />
+        android:id="@+id/menu_sync_immediately"
+        android:icon="@android:drawable/ic_popup_sync"
+        android:title="@string/menu_immediate_sync_title"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_settings"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/menu_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_manage_journal_folders"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="@string/menu_manage_folders"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_log_out_current_user"
+        android:icon="@android:drawable/ic_partial_secure"
+        android:title="@string/menu_log_out"
+        app:showAsAction="never" />
 </menu>

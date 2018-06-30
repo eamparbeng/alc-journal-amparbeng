@@ -1,16 +1,35 @@
 package alc.kofiamparbeng.ampjournal.activities;
 
-import android.content.Intent;
-import android.support.annotation.NonNull;
-
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.app.LoaderManager.LoaderCallbacks;
 
+import android.content.CursorLoader;
+import android.content.Loader;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.AsyncTask;
+
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,26 +48,26 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import alc.kofiamparbeng.ampjournal.R;
-import alc.kofiamparbeng.ampjournal.data.FirebaseDatabaseConstants;
-import alc.kofiamparbeng.ampjournal.sync.JournalSyncUtils;
+
+import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends Activity {
-    //Constants
+public class RegisterActivity extends Activity {
+
     private static final String TAG = "kofiamparbeng.journal";
     private static final int RC_SIGN_IN = 12100;
 
+    // UI references.
     private TextView mEmailTextView;
-    private  TextView mPasswordTextView;
+    private TextView mPasswordTextView;
+    private TextView mFullNameTextView;
     private ProgressBar progressBar;
 
     private FirebaseAuth auth;
@@ -57,33 +76,23 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
+        // Set up the register form.
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
-        if (auth.getCurrentUser() != null) {
-            // User is logged in
-            goToMainActivity();
-        }
-
-        mEmailTextView = (TextView)findViewById(R.id.tv_email);
-        mPasswordTextView=(TextView)findViewById(R.id.tv_password);
+        mEmailTextView = (TextView) findViewById(R.id.tv_email);
+        mPasswordTextView = (TextView) findViewById(R.id.tv_password);
+        mFullNameTextView = (TextView) findViewById(R.id.tv_full_name);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
-        Button btnEmailSignIn =(Button)findViewById(R.id.email_sign_in_button);
-        btnEmailSignIn.setOnClickListener(new OnClickListener() {
+        //Email Sign Up Button
+        Button btnEmailSignUp = (Button) findViewById(R.id.email_sign_up_button);
+        btnEmailSignUp.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                signInWithEmail();
-            }
-        });
-
-        TextView newSignUpTextView = (TextView)findViewById(R.id.tv_new_sign_up_prompt);
-        newSignUpTextView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                newSignUp();
+                signUpWithEmail();
             }
         });
 
@@ -93,7 +102,7 @@ public class LoginActivity extends Activity {
         signInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                singInWithGoogle();
+                signUpWithGoogle();
             }
         });
 
@@ -105,20 +114,13 @@ public class LoginActivity extends Activity {
                 .build();
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-
     }
 
+    private void signUpWithEmail() {
 
-    private void singInWithGoogle() {
-        progressBar.setVisibility(View.VISIBLE);
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    private void signInWithEmail(){
-        String email = mEmailTextView.getText().toString();
-        final String password = mPasswordTextView.getText().toString();
+        String email = mEmailTextView.getText().toString().trim();
+        String password = mPasswordTextView.getText().toString().trim();
+        String fullName = mFullNameTextView.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), R.string.emoty_email_prompt, Toast.LENGTH_SHORT).show();
@@ -130,66 +132,48 @@ public class LoginActivity extends Activity {
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        if (password.length() < 6) {
+            Toast.makeText(getApplicationContext(), R.string.password_complexity_check_failure_prompt, Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        //authenticate user
-        auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+        progressBar.setVisibility(View.VISIBLE);
+        //create user
+        auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        Toast.makeText(RegisterActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
-                        progressBar.setVisibility(View.GONE);
                         if (!task.isSuccessful()) {
-                            // there was an error
-                            if (password.length() < 3) {
-                                mPasswordTextView.setError(getString(R.string.error_invalid_password));
-                            } else {
-                                Toast.makeText(LoginActivity.this, getString(R.string.error_invalid_password), Toast.LENGTH_LONG).show();
-                            }
+                            Toast.makeText(RegisterActivity.this, getString(R.string.error_signing_in) + "\n" + task.getException(),
+                                    Toast.LENGTH_SHORT).show();
                         } else {
-                            processSuccessfulLoginResponse();
+                            goToHomePage();
                         }
                     }
                 })
-        .addOnFailureListener(LoginActivity.this, new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressBar.setVisibility(View.GONE);
-                Toast.makeText(LoginActivity.this, getString(R.string.error_signing_in), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    private void processSuccessfulLoginResponse(){
-        FirebaseUser currentUser = auth.getCurrentUser();
-        DatabaseReference fireDatabase = FirebaseDatabase.getInstance().getReference();
-        fireDatabase.child(FirebaseDatabaseConstants.JOURNAL_TABLE_NAME).child(currentUser.getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
+                .addOnFailureListener(RegisterActivity.this, new OnFailureListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        //Schedule Sync if user has data
-                        JournalSyncUtils.startImmediateCloudFetch(LoginActivity.this);
-                        goToMainActivity();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        goToMainActivity();
+                    public void onFailure(@NonNull Exception e) {
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(RegisterActivity.this, getString(R.string.error_signing_in), Toast.LENGTH_LONG).show();
                     }
                 });
     }
 
-    private void goToMainActivity() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+    private void signUpWithGoogle() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void newSignUp(){
-        Intent signUpFormIntent = new Intent(this, RegisterActivity.class);
-        startActivity(signUpFormIntent);
+
+    private void goToHomePage() {
+        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+        finish();
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
@@ -199,10 +183,9 @@ public class LoginActivity extends Activity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
                             FirebaseUser user = auth.getCurrentUser();
-                            goToMainActivity();
+                            goToHomePage();
                         } else {
                             //Snackbar.make(findViewById(R.id.main_layout), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
                         }
@@ -234,30 +217,7 @@ public class LoginActivity extends Activity {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-            progressBar.setVisibility(View.GONE);
-            Toast.makeText(LoginActivity.this, getString(R.string.error_signing_in), Toast.LENGTH_LONG).show();
         }
     }
-
-    private void updateUI(GoogleSignInAccount signedInAccount) {
-        if (signedInAccount != null || 1==1) {
-            Intent gotoMainActivityIntent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(gotoMainActivityIntent);
-        } else {
-            Toast.makeText(this, "Error signing in", Toast.LENGTH_LONG)
-                    .show();
-        }
-    }
-
-    /**
-     * Callback received when a permissions request has been completed.
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-
-    }
-
-
 }
 

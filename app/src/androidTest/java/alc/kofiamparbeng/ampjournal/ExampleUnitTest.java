@@ -1,6 +1,13 @@
-package alc.kofiamparbeng.io.ampjournal;
+package alc.kofiamparbeng.ampjournal;
+
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 
 import org.junit.Test;
+
+import java.util.List;
+
+import alc.kofiamparbeng.ampjournal.data.JournalListViewModel;
 
 import static org.junit.Assert.*;
 
@@ -10,6 +17,7 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
+
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);

@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "alc.kofiamparbeng.io.ampjournal"
+        applicationId "alc.kofiamparbeng.ampjournal"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
@@ -15,37 +15,84 @@ android {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+    signingConfigs {
+        key {
+            keyAlias 'alj-kofiamparbeng'
+            keyPassword '2bon2btitq'
+            storeFile file('/Volumes/code-work/AndroidStudioProjects/kofiamparbeng-personal.jks')
+            storePassword '2bon2btitq'
+        }
     }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.key
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-
-    implementation 'com.android.support:design:27.1.0'
-    implementation 'com.android.support:support-v4:27.1.0'
-    implementation 'com.android.support:support-annotations:27.1.0'
-    implementation 'com.google.android.gms:play-services-auth:15.0.1'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
-
-    implementation 'com.android.support:support-annotations:27.1.1'
 
     def room_version = "1.1.1"
+    def support_version = "27.1.1"
+    def firebase_version = "16.0.0"
+    def firebase_auth_version = "16.0.2"
+    def firebase_database_version = "16.0.1"
+    def firebase_jobDispatcher_version = "0.8.5"
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "com.android.support:appcompat-v7:$support_version"
+    implementation "com.android.support:support-annotations:$support_version"
+    implementation "com.android.support:recyclerview-v7:$support_version"
+    implementation "com.android.support:support-annotations:$support_version"
+    implementation "com.android.support:design:$support_version"
+    implementation "com.android.support:support-v4:$support_version"
+    implementation "com.android.support:preference-v7:$support_version"
+    implementation "com.android.support:preference-v7:$support_version"
+
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+
+
     implementation "android.arch.persistence.room:runtime:$room_version"
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:support-vector-drawable:27.1.1'
     annotationProcessor "android.arch.lifecycle:compiler:$room_version"
     implementation "android.arch.persistence.room:runtime:$room_version"
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"
-    testImplementation "android.arch.persistence.room:testing:$room_version"
     implementation "android.arch.lifecycle:extensions:$room_version"
 
+    implementation "com.google.firebase:firebase-core:$firebase_version"
+    implementation "com.google.firebase:firebase-auth:$firebase_auth_version"
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation "com.google.firebase:firebase-database:$firebase_database_version"
+    implementation "com.firebase:firebase-jobdispatcher:$firebase_jobDispatcher_version"
+
+    androidTestImplementation "android.arch.persistence.room:testing:$room_version"
+    // Test helpers for LiveData
+    androidTestImplementation "android.arch.core:core-testing:$room_version"
+    // Test helpers for Room
+    androidTestImplementation "android.arch.persistence.room:testing:$room_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation "com.android.support:support-annotations:$support_version"
+
+    androidTestImplementation "org.mockito:mockito-core:2.11.0"
+    androidTestImplementation "org.mockito:mockito-android:2.11.0"
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+
 }
+
+apply plugin: 'com.google.gms.google-services'

@@ -21,7 +21,13 @@ public class JournalEntry {
     private String mBody;
     @NonNull
     @ColumnInfo(name = "entryDate")
-    private Date mDate;
+    private Date mEntryDate;
+
+    @ColumnInfo(name = "updatedDate")
+    private Date mUpdatedDate;
+
+    @ColumnInfo(name = "folder_name")
+    private String mFolderName;
 
     public void setTitle(@NonNull String title) {
         this.mTitle = title;
@@ -39,12 +45,12 @@ public class JournalEntry {
         return mBody;
     }
 
-    public void setDate(@NonNull Date date) {
-        this.mDate = date;
+    public void setEntryDate(@NonNull Date date) {
+        this.mEntryDate = date;
     }
 
-    public Date getDate() {
-        return mDate;
+    public Date getEntryDate() {
+        return mEntryDate;
     }
 
 
@@ -56,4 +62,19 @@ public class JournalEntry {
         this.id = newId;
     }
 
+    public void setUpdatedDate(@NonNull Date date) {
+        this.mUpdatedDate = date;
+    }
+
+    public Date getUpdatedDate() {
+        return mUpdatedDate;
+    }
+
+    public void setFolderName(@NonNull String folderName) {
+        this.mFolderName = folderName;
+    }
+
+    public String getFolderName() {
+        return mFolderName;
+    }
 }

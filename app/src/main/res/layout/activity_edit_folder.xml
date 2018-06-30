@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_folder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/tv_folder_name"
+            style="@style/InputElementStyle"
+            android:hint="@string/folder_entry_hint" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_folder_save"
+        style="@style/InputElementButtonStyle"
+        android:text="@string/title_activity_new_folder"
+        app:layout_constraintTop_toBottomOf="@id/input_layout_folder" />
+</android.support.constraint.ConstraintLayout>

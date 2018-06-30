@@ -30,6 +30,10 @@ public class JournalListViewModel extends AndroidViewModel {
         return mRepository.getJournalEntryByIdNoWatch(id);
     }
 
+    public void deleteJournalEntryById(JournalEntry entry) {
+         mRepository.deleteJournalEntryById(entry);
+    }
+
     public void insert(JournalEntry entry) {
         mRepository.insert(entry);
     }

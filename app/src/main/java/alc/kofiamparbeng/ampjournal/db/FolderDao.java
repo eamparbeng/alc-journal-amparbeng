@@ -35,4 +35,7 @@ public interface FolderDao {
 
     @Query("SELECT * from folder_tbl ORDER BY folder_name ASC")
     List<JournalFolder> getAllFoldersList();
+
+    @Query("DELETE from folder_tbl WHERE id = :id")
+    void deleteFolderById(int id);
 }

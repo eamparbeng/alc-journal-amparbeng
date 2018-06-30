@@ -20,6 +20,10 @@ public class FolderListViewModel extends AndroidViewModel {
         mAllFolders = mRepository.getAllFolders();
     }
 
+    public void deleteFolderById(JournalFolder folder) {
+        mRepository.deleteFolderById(folder);
+    }
+
     public LiveData<List<JournalFolder>> getAllFolders() {
         return mAllFolders;
     }

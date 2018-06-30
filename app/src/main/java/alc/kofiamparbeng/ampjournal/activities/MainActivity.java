@@ -11,8 +11,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -24,13 +24,12 @@ import java.util.List;
 
 import alc.kofiamparbeng.ampjournal.R;
 import alc.kofiamparbeng.ampjournal.data.JournalAdapter;
-import alc.kofiamparbeng.ampjournal.data.JournalEntryViewModel;
 import alc.kofiamparbeng.ampjournal.data.JournalListViewModel;
+import alc.kofiamparbeng.ampjournal.data.JournalEntrySwipeToDeleteHandler;
 import alc.kofiamparbeng.ampjournal.entities.JournalEntry;
-import alc.kofiamparbeng.ampjournal.fragments.SettingsFragment;
 import alc.kofiamparbeng.ampjournal.sync.JournalSyncUtils;
 
-public class MainActivity extends AppCompatActivity implements JournalAdapter.JournalEntryClickListener {
+public class MainActivity extends AppCompatActivity implements JournalAdapter.JournalEntryEventListener{
     private JournalAdapter mJournalAdapter;
     private RecyclerView mRecyclerView;
     private JournalListViewModel mJournalEntryViewModel;
@@ -108,6 +107,10 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.Jo
         mRecyclerView.setLayoutManager(layoutManager);
 
         mJournalAdapter.setJournalEntryClickListener(this);
+
+        JournalEntrySwipeToDeleteHandler swipeToDeleteHandler = new JournalEntrySwipeToDeleteHandler(this);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(swipeToDeleteHandler);
+        touchHelper.attachToRecyclerView(mRecyclerView);
     }
 
     private void prepareFloatingActionButton() {
@@ -165,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.Jo
                         R.string.new_journal_entry_inserted_message,
                         Toast.LENGTH_LONG).show();
             }
+            JournalSyncUtils.startImmediateSync(this);
         } else {
             Toast.makeText(
                     getApplicationContext(),
@@ -211,6 +215,14 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.Jo
         Intent intent = new Intent(MainActivity.this, NewJournalEntryActivity.class);
         intent.putExtra(NewJournalEntryActivity.EXTRA_JOURNAL_ENTRY_ID, journalEntryId);
         startActivityForResult(intent, NEW_JOURNAL_ENTRY_ACTIVITY_REQUEST_CODE);
+    }
+
+    @Override
+    public void onJournalEntrySwipedLeft(JournalEntry journalEntry, int position) {
+        mJournalEntryViewModel.deleteJournalEntryById(journalEntry);
+        mJournalAdapter.notifyItemRemoved(position);
+        JournalSyncUtils.startImmediateSync(this);
+        Toast.makeText(MainActivity.this,R.string.journal_item_removed_message, Toast.LENGTH_LONG);
     }
 
     private void syncImmediately() {

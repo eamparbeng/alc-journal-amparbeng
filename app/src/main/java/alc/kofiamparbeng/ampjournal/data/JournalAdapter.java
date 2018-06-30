@@ -25,14 +25,14 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
     private static final SimpleDateFormat simpleDateFormatShortDate = new SimpleDateFormat("dd MMM");
     private static final SimpleDateFormat simpleDateFormatFullDate = new SimpleDateFormat("dd MMM yy");
 
-    private JournalEntryClickListener mEntryClickListener;
+    private JournalEntryEventListener mEntryEventListener;
 
     public JournalAdapter(Context context) {
         mInfater = LayoutInflater.from(context);
     }
 
-    public void setJournalEntryClickListener(JournalEntryClickListener newListener) {
-        mEntryClickListener = newListener;
+    public void setJournalEntryClickListener(JournalEntryEventListener newListener) {
+        mEntryEventListener = newListener;
     }
 
     @NonNull
@@ -107,14 +107,21 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
 
         @Override
         public void onClick(View view) {
-            if (mEntryClickListener != null) {
+            if (mEntryEventListener != null) {
                 JournalEntry currentEntry = mEntries.get(getAdapterPosition());
-                mEntryClickListener.onJournalEntryClicked(currentEntry.getId());
+                mEntryEventListener.onJournalEntryClicked(currentEntry.getId());
             }
+        }
+
+        public void onDelete(){
+            int position = getAdapterPosition();
+            JournalEntry currentEntry = mEntries.get(position);
+            mEntryEventListener.onJournalEntrySwipedLeft(currentEntry, position);
         }
     }
 
-    public interface JournalEntryClickListener {
+    public interface JournalEntryEventListener {
         void onJournalEntryClicked(int journalEntryId);
+        void onJournalEntrySwipedLeft(JournalEntry journalEntry, int position);
     }
 }

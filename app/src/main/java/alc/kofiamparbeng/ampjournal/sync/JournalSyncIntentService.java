@@ -11,6 +11,6 @@ public class JournalSyncIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        JournalSyncTask.syncJournal(this);
+        JournalSyncTask.syncJournalToCloud(this);
     }
 }

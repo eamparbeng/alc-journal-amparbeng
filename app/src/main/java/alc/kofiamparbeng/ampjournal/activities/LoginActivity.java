@@ -29,8 +29,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import alc.kofiamparbeng.ampjournal.R;
+import alc.kofiamparbeng.ampjournal.data.FirebaseDatabaseConstants;
+import alc.kofiamparbeng.ampjournal.sync.JournalSyncUtils;
 
 /**
  * A login screen that offers login via email/password.
@@ -142,7 +149,7 @@ public class LoginActivity extends Activity {
                                 Toast.makeText(LoginActivity.this, getString(R.string.error_invalid_password), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            goToMainActivity();
+                            processSuccessfulLoginResponse();
                         }
                     }
                 })
@@ -153,6 +160,25 @@ public class LoginActivity extends Activity {
                 Toast.makeText(LoginActivity.this, getString(R.string.error_signing_in), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void processSuccessfulLoginResponse(){
+        FirebaseUser currentUser = auth.getCurrentUser();
+        DatabaseReference fireDatabase = FirebaseDatabase.getInstance().getReference();
+        fireDatabase.child(FirebaseDatabaseConstants.JOURNAL_TABLE_NAME).child(currentUser.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        //Schedule Sync if user has data
+                        JournalSyncUtils.startImmediateCloudFetch(LoginActivity.this);
+                        goToMainActivity();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        goToMainActivity();
+                    }
+                });
     }
 
     private void goToMainActivity() {
@@ -208,6 +234,8 @@ public class LoginActivity extends Activity {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+            progressBar.setVisibility(View.GONE);
+            Toast.makeText(LoginActivity.this, getString(R.string.error_signing_in), Toast.LENGTH_LONG).show();
         }
     }
 

@@ -37,4 +37,7 @@ public class JournalListViewModel extends AndroidViewModel {
     public void update(JournalEntry entry) {
         mRepository.update(entry);
     }
+    public void clearDatabase() {
+        mRepository.clearDb();
+    }
 }

@@ -81,6 +81,6 @@ public class FolderSelecterActivity extends AppCompatActivity implements FolderA
 
     @Override
     public void onFolderClickedId(int folderId) {
-        
+
     }
 }

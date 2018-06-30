@@ -5,7 +5,7 @@
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_select_folder">Select Journal Folder</string>
     <string name="title_activity_manage_folder">Journal Folders</string>
-    <string name="title_activity_edit_folder">Add/Edit Journal Folders</string>
+    <string name="title_activity_edit_folder">Journal Folders</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -43,6 +43,12 @@
     <string name="new_folder_cancelled_message">New Folder Entry Cancelled</string>
     <string name="new_folder_inserted_message">New Folder Added</string>
     <string name="new_folder_updated_message">Journal Folder Updated</string>
+    <string name="immediate_sync_started_message">Journal Entries and folders are being synced to cloud now</string>
+
+    <string name="menu_immediate_sync_title">Sync Immediately</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_manage_folders">Manage Folders</string>
+    <string name="menu_log_out">Log Out</string>
 
     <string name="main_app_title">AmpJournal</string>
     <string name="sub_app_title">Entry into Google Africa Challenge</string>

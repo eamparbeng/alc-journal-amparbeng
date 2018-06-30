@@ -174,6 +174,7 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.Jo
     }
 
     private void logOutCurrentUser() {
+        mJournalEntryViewModel.clearDatabase();
         auth.signOut();
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
         finish();
@@ -199,6 +200,8 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.Jo
         if (itemId == R.id.menu_manage_journal_folders) {
             Intent intent = new Intent(MainActivity.this, FolderManagementActivity.class);
             startActivity(intent);
+        }if (itemId == R.id.menu_sync_immediately) {
+            syncImmediately();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -208,5 +211,11 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.Jo
         Intent intent = new Intent(MainActivity.this, NewJournalEntryActivity.class);
         intent.putExtra(NewJournalEntryActivity.EXTRA_JOURNAL_ENTRY_ID, journalEntryId);
         startActivityForResult(intent, NEW_JOURNAL_ENTRY_ACTIVITY_REQUEST_CODE);
+    }
+
+    private void syncImmediately() {
+        Toast.makeText(MainActivity.this, R.string.immediate_sync_started_message, Toast.LENGTH_LONG)
+                .show();
+        JournalSyncUtils.startImmediateSync(this);
     }
 }

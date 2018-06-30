@@ -16,7 +16,7 @@ public class JournalSyncFirebaseJobService extends JobService {
             protected Void doInBackground(Void... voids) {
                 Context context = getApplicationContext();
                 //Do the Synchronization
-                JournalSyncTask.syncJournal(context);
+                JournalSyncTask.syncJournalToCloud(context);
                 return null;
             }
 

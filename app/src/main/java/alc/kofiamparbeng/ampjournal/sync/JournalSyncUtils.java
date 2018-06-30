@@ -35,7 +35,7 @@ public class JournalSyncUtils {
     private static final int SYNC_INTERVAL_SECONDS = (int) TimeUnit.HOURS.toSeconds(SYNC_INTERVAL_HOURS);
     private static final int SYNC_FLEXTIME_SECONDS = SYNC_INTERVAL_SECONDS / 3;
 
-    private static boolean sInitialized;
+    private static boolean sInitialized, sCloudFetchInitialized;
 
     private static final String JOURNAL_SYNC_TAG = "journa-sync";
 
@@ -80,12 +80,28 @@ public class JournalSyncUtils {
         checkForEmpty.start();
     }
 
-    /**
-     * Helper method to perform a sync immediately using an IntentService for asynchronous
-     * execution.
-     *
-     * @param context The Context used to start the IntentService for the sync.
-     */
+    synchronized public static void initializeCloudFetch(@NonNull final Context context) {
+
+        if (sCloudFetchInitialized) return;
+
+        sCloudFetchInitialized = true;
+
+        Thread checkForEmpty = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                startImmediateCloudFetch(context);
+            }
+        });
+
+        /* Finally, once the thread is prepared, fire it off to perform our checks. */
+        checkForEmpty.start();
+    }
+
+    public static void startImmediateCloudFetch(@NonNull final Context context) {
+        Intent intentToSyncImmediately = new Intent(context, JournalCloudFetchIntentService.class);
+        context.startService(intentToSyncImmediately);
+    }
+
     public static void startImmediateSync(@NonNull final Context context) {
         Intent intentToSyncImmediately = new Intent(context, JournalSyncIntentService.class);
         context.startService(intentToSyncImmediately);

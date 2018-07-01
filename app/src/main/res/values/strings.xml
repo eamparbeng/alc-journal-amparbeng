@@ -44,6 +44,8 @@
     <string name="new_folder_inserted_message">New Folder Added</string>
     <string name="new_folder_updated_message">Journal Folder Updated</string>
     <string name="immediate_sync_started_message">Journal Entries and folders are being synced to cloud now</string>
+    <string name="journal_item_removed_message">Journal Entry removed successfully</string>
+    <string name="folder_item_removed_message">Journal Folder removed successfully</string>
 
     <string name="menu_immediate_sync_title">Sync Immediately</string>
     <string name="menu_settings">Settings</string>

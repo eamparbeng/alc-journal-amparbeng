@@ -49,6 +49,14 @@ public class JournalRepository {
         new clearDbAsyncTask(mJournalDao, mFolderDao).execute();
     }
 
+    public void deleteJournalEntryById(JournalEntry entry) {
+        new deleteJournalTask(mJournalDao).execute(entry);
+    }
+
+    public void deleteFolderById(JournalFolder folder) {
+        new deleteFolderTask(mFolderDao).execute(folder);
+    }
+
     private static class insertAsyncTask extends AsyncTask<JournalEntry, Void, Void> {
 
         private JournalDao mAsyncTaskDao;
@@ -75,6 +83,36 @@ public class JournalRepository {
         @Override
         protected Void doInBackground(final JournalEntry... params) {
             mAsyncTaskDao.update(params[0]);
+            return null;
+        }
+    }
+
+    private static class deleteJournalTask extends AsyncTask<JournalEntry, Void, Void> {
+
+        private JournalDao mAsyncTaskDao;
+
+        deleteJournalTask(JournalDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final JournalEntry... params) {
+            mAsyncTaskDao.deleteJournalEntryById(params[0].getId());
+            return null;
+        }
+    }
+
+    private static class deleteFolderTask extends AsyncTask<JournalFolder, Void, Void> {
+
+        private FolderDao mAsyncTaskDao;
+
+        deleteFolderTask(FolderDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final JournalFolder... params) {
+            mAsyncTaskDao.deleteFolderById(params[0].getId());
             return null;
         }
     }

@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,9 +20,11 @@ import java.util.List;
 import alc.kofiamparbeng.ampjournal.R;
 import alc.kofiamparbeng.ampjournal.data.FolderAdapter;
 import alc.kofiamparbeng.ampjournal.data.FolderListViewModel;
+import alc.kofiamparbeng.ampjournal.data.FolderSwipeToDeleteHandler;
 import alc.kofiamparbeng.ampjournal.entities.JournalFolder;
+import alc.kofiamparbeng.ampjournal.sync.JournalSyncUtils;
 
-public class FolderManagementActivity extends AppCompatActivity implements FolderAdapter.FolderClickListener {
+public class FolderManagementActivity extends AppCompatActivity implements FolderAdapter.FolderEventsListener {
     public static final String EXTRA_FOLDER_SELECTER_SELECTED_FOLDER_NAME = "";
     public static final int NEW_FOLDER_ACTIVITY_REQUEST_CODE = 713;
 
@@ -72,6 +75,10 @@ public class FolderManagementActivity extends AppCompatActivity implements Folde
         mRecyclerView.setLayoutManager(layoutManager);
 
         mFolderAdapter.setFolderClickListener(this);
+
+        FolderSwipeToDeleteHandler swipeToDeleteHandler = new FolderSwipeToDeleteHandler(this);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(swipeToDeleteHandler);
+        touchHelper.attachToRecyclerView(mRecyclerView);
     }
 
     @Override
@@ -127,5 +134,13 @@ public class FolderManagementActivity extends AppCompatActivity implements Folde
         Intent intent = new Intent(FolderManagementActivity.this, EditFolderActivity.class);
         intent.putExtra(EditFolderActivity.EXTRA_JOURNAL_FOLDER_ID, folderId);
         startActivityForResult(intent, NEW_FOLDER_ACTIVITY_REQUEST_CODE);
+    }
+
+    @Override
+    public void onFolderSwipedLeft(JournalFolder folder, int position) {
+        mFolderModel.deleteFolderById(folder);
+        mFolderAdapter.notifyItemRemoved(position);
+        JournalSyncUtils.startImmediateSync(this);
+        Toast.makeText(FolderManagementActivity.this,R.string.folder_item_removed_message, Toast.LENGTH_LONG);
     }
 }

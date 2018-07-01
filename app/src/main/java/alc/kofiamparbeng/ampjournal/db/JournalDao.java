@@ -35,4 +35,7 @@ public interface JournalDao {
 
     @Query("SELECT * from journal_tbl ORDER BY entryDate DESC")
     List<JournalEntry> getAllEntriesList();
+
+    @Query("DELETE from journal_tbl WHERE id = :id")
+    void deleteJournalEntryById(int id);
 }

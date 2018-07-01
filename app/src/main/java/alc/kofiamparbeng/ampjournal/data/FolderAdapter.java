@@ -8,27 +8,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import alc.kofiamparbeng.ampjournal.R;
-import alc.kofiamparbeng.ampjournal.entities.JournalEntry;
 import alc.kofiamparbeng.ampjournal.entities.JournalFolder;
 
 public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.ViewHolder> {
     private LayoutInflater mInfater;
     private List<JournalFolder> mFolders;
 
-    private FolderClickListener mFolderClickListener;
+    private FolderEventsListener mFolderEventsListener;
 
     public FolderAdapter(Context context) {
         mInfater = LayoutInflater.from(context);
     }
 
-    public void setFolderClickListener(FolderClickListener newListener) {
-        mFolderClickListener = newListener;
+    public void setFolderClickListener(FolderEventsListener newListener) {
+        mFolderEventsListener = newListener;
     }
 
     @NonNull
@@ -41,7 +37,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (mFolders != null) {
             JournalFolder current = mFolders.get(position);
-            holder.doViewBindings(position, current);
+            holder.doViewBindings(position, current, holder.itemView);
         } else {
             // Covers the case of data not being ready yet.
             //holder.wordItemView.setText("No Word");
@@ -70,22 +66,30 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.ViewHolder
             itemView.setOnClickListener(this);
         }
 
-        public void doViewBindings(int posittion, JournalFolder dataItem) {
+        public void doViewBindings(int posittion, JournalFolder dataItem, View view) {
             mFolderNameTextView.setText(dataItem.getName());
+
         }
 
         @Override
         public void onClick(View view) {
-            if (mFolderClickListener != null) {
+            if (mFolderEventsListener != null) {
                 JournalFolder currentEntry = mFolders.get(getAdapterPosition());
-                mFolderClickListener.onFolderClicked(currentEntry.getName());
-                mFolderClickListener.onFolderClickedId(currentEntry.getId());
+                mFolderEventsListener.onFolderClicked(currentEntry.getName());
+                mFolderEventsListener.onFolderClickedId(currentEntry.getId());
             }
+        }
+
+        public void onDelete(){
+            int position = getAdapterPosition();
+            JournalFolder currentFolder = mFolders.get(position);
+            mFolderEventsListener.onFolderSwipedLeft(currentFolder, position);
         }
     }
 
-    public interface FolderClickListener {
+    public interface FolderEventsListener {
         void onFolderClicked(String folderName);
         void onFolderClickedId(int folderId);
+        void onFolderSwipedLeft(JournalFolder folder, int position);
     }
 }

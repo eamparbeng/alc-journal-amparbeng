@@ -11,7 +11,7 @@ with units tests built wit Junit, Mockito and Android Architecture Unit Tests
 
 To install the application, download the APK from the link below
 
-[Signed APK](https://acsint.io/)
+[Signed APK](https://drive.google.com/file/d/1yD_aHGR-09uD_LPmXjuZq4qbjGAmd_iD/view?usp=sharing)
 
 Regsiter with Email Address and Password or Google Account
 

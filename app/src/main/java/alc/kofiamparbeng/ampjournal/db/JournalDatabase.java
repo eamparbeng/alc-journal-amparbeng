@@ -7,6 +7,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import java.util.Date;
 
@@ -29,6 +30,7 @@ public abstract class JournalDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             JournalDatabase.class, "journal_db")
                             .addMigrations(MIGRATION_1_2,MIGRATION_2_3, MIGRATION_3_4)
+                            .addCallback(SEED_CALLBACK)
                             .build();
                 }
             }
@@ -74,5 +76,22 @@ public abstract class JournalDatabase extends RoomDatabase {
                     + " ADD COLUMN folder_name TEXT");
         }
     };
+
+    static final Callback SEED_CALLBACK = new Callback() {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+            seedFolderData(db);
+        }
+    };
+
+    static void seedFolderData(SupportSQLiteDatabase db){
+        final String insertTemplate = "INSERT INTO folder_tbl (folder_name, creation_date) VALUES(?, ?)";
+
+        db.execSQL(insertTemplate, new Object[]{"Diary", new Date()});
+        db.execSQL(insertTemplate, new Object[]{"Notes", new Date()});
+        db.execSQL(insertTemplate, new Object[]{"Tasks", new Date()});
+        db.execSQL(insertTemplate, new Object[]{"Misc", new Date()});
+    }
 
 }

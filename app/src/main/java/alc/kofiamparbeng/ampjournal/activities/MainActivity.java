@@ -23,16 +23,19 @@ import java.util.Date;
 import java.util.List;
 
 import alc.kofiamparbeng.ampjournal.R;
+import alc.kofiamparbeng.ampjournal.data.FolderListViewModel;
 import alc.kofiamparbeng.ampjournal.data.JournalAdapter;
 import alc.kofiamparbeng.ampjournal.data.JournalListViewModel;
 import alc.kofiamparbeng.ampjournal.data.JournalEntrySwipeToDeleteHandler;
 import alc.kofiamparbeng.ampjournal.entities.JournalEntry;
+import alc.kofiamparbeng.ampjournal.entities.JournalFolder;
 import alc.kofiamparbeng.ampjournal.sync.JournalSyncUtils;
 
 public class MainActivity extends AppCompatActivity implements JournalAdapter.JournalEntryEventListener{
     private JournalAdapter mJournalAdapter;
     private RecyclerView mRecyclerView;
     private JournalListViewModel mJournalEntryViewModel;
+    private FolderListViewModel mFolderViewModel;
 
     private SwipeRefreshLayout swipeContainer;
 
@@ -94,6 +97,14 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.Jo
             public void onChanged(@Nullable final List<JournalEntry> entries) {
                 // Update the cached copy of the words in the adapter.
                 mJournalAdapter.setEntries(entries);
+            }
+        });
+
+        mFolderViewModel = ViewModelProviders.of(this).get(FolderListViewModel.class);
+        mFolderViewModel.getAllFolders().observe(this, new Observer<List<JournalFolder>>() {
+            @Override
+            public void onChanged(@Nullable List<JournalFolder> folders) {
+                mJournalAdapter.setFolders(folders);
             }
         });
     }
@@ -204,8 +215,6 @@ public class MainActivity extends AppCompatActivity implements JournalAdapter.Jo
         if (itemId == R.id.menu_manage_journal_folders) {
             Intent intent = new Intent(MainActivity.this, FolderManagementActivity.class);
             startActivity(intent);
-        }if (itemId == R.id.menu_sync_immediately) {
-            syncImmediately();
         }
         return super.onOptionsItemSelected(item);
     }

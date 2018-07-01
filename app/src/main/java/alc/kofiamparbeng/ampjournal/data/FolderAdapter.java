@@ -37,7 +37,7 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (mFolders != null) {
             JournalFolder current = mFolders.get(position);
-            holder.doViewBindings(position, current);
+            holder.doViewBindings(position, current, holder.itemView);
         } else {
             // Covers the case of data not being ready yet.
             //holder.wordItemView.setText("No Word");
@@ -66,8 +66,9 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.ViewHolder
             itemView.setOnClickListener(this);
         }
 
-        public void doViewBindings(int posittion, JournalFolder dataItem) {
+        public void doViewBindings(int posittion, JournalFolder dataItem, View view) {
             mFolderNameTextView.setText(dataItem.getName());
+
         }
 
         @Override

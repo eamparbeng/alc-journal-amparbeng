@@ -12,6 +12,7 @@
     <TextView
         android:id="@+id/tv_journal_folder"
         style="@style/ListHighlightElementStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@id/folder_guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".4" />
+        app:layout_constraintGuide_percent=".3" />
 
     <TextView
         android:id="@+id/tv_journal_date"
@@ -42,6 +43,7 @@
         android:id="@+id/tv_journal_title"
         style="@style/ListNormaltElementStyle"
         app:layout_constraintStart_toEndOf="@id/folder_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_journal_date"
         tools:text="Here is a Journal Entry" />
 

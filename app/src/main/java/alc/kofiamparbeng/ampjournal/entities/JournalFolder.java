@@ -2,6 +2,7 @@ package alc.kofiamparbeng.ampjournal.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
@@ -17,6 +18,7 @@ public class JournalFolder {
     @ColumnInfo(name = "folder_name")
     private String mName;
 
+
     @NonNull
     @ColumnInfo(name = "creation_date")
     private Date mCreationDate;
@@ -28,7 +30,6 @@ public class JournalFolder {
     public String getName() {
         return mName;
     }
-
 
     public void setCreationDate(@NonNull Date date) {
         this.mCreationDate = date;

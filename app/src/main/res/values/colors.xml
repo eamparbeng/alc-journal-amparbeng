@@ -4,4 +4,16 @@
     <color name="colorPrimary">#263238</color>
     <color name="colorPrimaryDark">#212121</color>
     <color name="colorAccent">#FFD600</color>
+    <color name="colorAccent2">#76FF03</color>
+
+    <color name="colorFolder1">#ef9a9a</color>
+    <color name="colorFolder2">#F48FB1</color>
+    <color name="colorFolder3">#B39DDB</color>
+    <color name="colorFolder4">#9FA8DA</color>
+    <color name="colorFolder5">#81D4FA</color>
+    <color name="colorFolder6">#80DEEA</color>
+    <color name="colorFolder7">#80CBC4</color>
+    <color name="colorFolder8">#C5E1A5</color>
+    <color name="colorFolder9">#FFF176</color>
+    <color name="colorFolder10">#A1887F</color>
 </resources>

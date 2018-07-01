@@ -1,7 +1,10 @@
 package alc.kofiamparbeng.ampjournal.data;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.PluralsRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,19 +19,23 @@ import java.util.List;
 
 import alc.kofiamparbeng.ampjournal.R;
 import alc.kofiamparbeng.ampjournal.entities.JournalEntry;
+import alc.kofiamparbeng.ampjournal.entities.JournalFolder;
 
 public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHolder> {
     private LayoutInflater mInfater;
     private List<JournalEntry> mEntries;
+    private List<JournalFolder> mFolders;
 
     private static final SimpleDateFormat simpleDateFormatDayName = new SimpleDateFormat("EEEE");
     private static final SimpleDateFormat simpleDateFormatShortDate = new SimpleDateFormat("dd MMM");
     private static final SimpleDateFormat simpleDateFormatFullDate = new SimpleDateFormat("dd MMM yy");
 
     private JournalEntryEventListener mEntryEventListener;
+    private final Context context;
 
     public JournalAdapter(Context context) {
         mInfater = LayoutInflater.from(context);
+        this.context = context;
     }
 
     public void setJournalEntryClickListener(JournalEntryEventListener newListener) {
@@ -45,7 +52,7 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (mEntries != null) {
             JournalEntry current = mEntries.get(position);
-            holder.doViewBindings(position, current);
+            holder.doViewBindings(position, current, context);
         } else {
             // Covers the case of data not being ready yet.
             //holder.wordItemView.setText("No Word");
@@ -61,6 +68,10 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
     public void setEntries(List<JournalEntry> entries) {
         mEntries = entries;
         notifyDataSetChanged();
+    }
+
+    public void setFolders(List<JournalFolder> folders) {
+        mFolders = folders;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -80,12 +91,15 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
             itemView.setOnClickListener(this);
         }
 
-        public void doViewBindings(int posittion, JournalEntry dataItem) {
+        public void doViewBindings(int posittion, JournalEntry dataItem, Context context) {
             mJournalSubjectTextView.setText(dataItem.getTitle());
             mFolderNameTextView.setText(dataItem.getFolderName());
 
             mJournalDateTextView.setText(formatJournalEntryDate(dataItem.getEntryDate()));
             mFullJournalDateTextView.setText(simpleDateFormatFullDate.format(dataItem.getEntryDate()));
+
+           /* int folderColor = ContextCompat.getColor(context, getFolderColor(dataItem.getFolderName()));
+            mFolderNameTextView.setBackground(new ColorDrawable(folderColor));*/
         }
 
         private String formatJournalEntryDate(Date entryDate) {
@@ -113,15 +127,58 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.ViewHold
             }
         }
 
-        public void onDelete(){
+        public void onDelete() {
             int position = getAdapterPosition();
             JournalEntry currentEntry = mEntries.get(position);
             mEntryEventListener.onJournalEntrySwipedLeft(currentEntry, position);
         }
     }
 
+    private int getFolderColor(String folderName) {
+        int position = 0;
+        for (int i = 0; i < mFolders.size(); i++) {
+            if (mFolders.get(i).getName().equals(folderName)) {
+                position = i;
+                break;
+            }
+        }
+        int backGroundColor = R.color.colorFolder1;
+
+        switch (position % 10) {
+            case 1:
+                backGroundColor = R.color.colorFolder2;
+                break;
+            case 2:
+                backGroundColor = R.color.colorFolder3;
+                break;
+            case 3:
+                backGroundColor = R.color.colorFolder4;
+                break;
+            case 4:
+                backGroundColor = R.color.colorFolder5;
+                break;
+            case 5:
+                backGroundColor = R.color.colorFolder6;
+                break;
+            case 6:
+                backGroundColor = R.color.colorFolder7;
+                break;
+            case 7:
+                backGroundColor = R.color.colorFolder8;
+                break;
+            case 8:
+                backGroundColor = R.color.colorFolder9;
+                break;
+            case 9:
+                backGroundColor = R.color.colorFolder10;
+                break;
+        }
+        return backGroundColor;
+    }
+
     public interface JournalEntryEventListener {
         void onJournalEntryClicked(int journalEntryId);
+
         void onJournalEntrySwipedLeft(JournalEntry journalEntry, int position);
     }
 }
